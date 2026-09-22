@@ -1,8 +1,19 @@
-## 最终消息风格
+## 一、最终消息风格
 
 - 回复紧凑，避免不必要的换行。
 
-## 工具选择
+## 二、数据安全
+
+- 删除文件或卸载程序时，将目标移到回收站，不要使用 `rm`。
+- 未经用户明确同意，不要执行 `commit` 或 `push`。
+
+## 三、资源管理
+
+- 将 skills 统一存放在 `~/.agents`。
+
+## 四、工具使用
+
+### 1. 工具路由
 
 - Windows 环境中，请优先使用 `wsl`，而不是 `powershell`。
 - 包管理器 apt > pnpm > npm > uv > scoop 。
@@ -17,18 +28,9 @@
   - **开发**：`go-task`、`clang`、`lldb`、`cmake`、`tmux`、`timeout`、`hyperfine`
 - 其他工具优先使用 `npx` 或 `uvx`。
 
-## 数据安全
+### 2. tmux（会话、交互、调试增强）
 
-- 删除文件或卸载程序时，将目标移到回收站，不要使用 `rm`。
-- 未经用户明确同意，不要执行 `commit` 或 `push`。
-
-## 资源管理
-
-- 将 skills 统一存放在 `~/.agents`。
-
-## tmux（会话、交互、调试增强）
-
-### 会话命名统一规范
+会话命名统一规范：
 
 会话 id 使用 `pi-<项目>-<会话ID>-<任务>` 命名，例如 `pi-sqlite_v3-9766127e-source_download`。
 
@@ -53,4 +55,38 @@ tmux capture-pane -p -t "$tmux_session_id"
 # 结束会话
 tmux kill-session -t "$tmux_session_id"
 # ...
+```
+### 3. fd（文件搜索增强）
+
+- `fd` 用于快速查找文件和目录；复杂属性筛选使用 `find`
+- 默认跳过隐藏路径和 `.gitignore` 忽略的路径
+
+```bash
+# 按名称查找（默认递归、正则匹配）
+fd pattern
+# 指定目录
+fd pattern /path/to/search
+# 只查找文件或目录
+fd -t f pattern
+fd -t d pattern
+# 按扩展名查找
+fd -e rs
+# 使用 glob 匹配文件名
+fd -g '*.test.ts'
+# 匹配完整路径
+fd -p 'src/.*/test_.*\\.py'
+# 包含隐藏文件；包含 .gitignore 忽略的文件
+fd -H pattern
+fd -I pattern
+# 包含隐藏和所有被忽略的文件
+fd -u pattern
+# 与 rg 组合搜索文件内容
+fd -e rs -X rg -n 'TODO|FIXME'
+# 每个结果执行一次命令；所有结果一次性传入命令
+fd -e json -x jq empty
+fd -g 'test_*.py' -X printf '%s\\n'
+# 查看帮助
+fd --help
+# 部分环境可能使用 fdfind
+command -v fd fdfind
 ```
