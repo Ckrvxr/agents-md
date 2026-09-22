@@ -10,6 +10,7 @@
 - 查询库和框架文档优先使用 `context7`。
 - 环境中已经有以下常见 Unix 工具，请优先使用他们：
   - **文件**：`rg`、`fd`、`fzf`、`file`、`7zip`、`rsync`
+    - `fd` 指 sharkdp/fd，是 `find` 的性能更好的现代替代品；查找文件时优先直接使用 `fd`（如 `fd -e rs`、`fd -t f`）。
   - **数据处理**：`jq`、`yq`、`dasel`、`sqlite3`
   - **多媒体**：`ffmpeg`、`imagemagick`、`yt-dlp`、`mediainfo`
   - **网络**：`curl`、`aria2c`、`mtr`、`doggo`、`iperf3`、`tshark`
@@ -29,27 +30,27 @@
 
 ### 会话命名统一规范
 
-会话 id 使用 `pi-<项目>-<会话ID>-<任务>` 命名，例如 `pi-api-01a0c831-source_download`。
+会话 id 使用 `pi-<项目>-<会话ID>-<任务>` 命名，例如 `pi-sqlite_v3-9766127e-source_download`。
 
-- 使用 `PI_SESSION_ID` 区分 Pi 会话，只取前 8 位。
-- 其他 Pi 变量不用于命名会话。
+使用 `PI_SESSION_ID` 区分 Pi 会话，取末尾 8 位。
 
 ```bash
-project="$(basename "$PWD")" # 项目名
-session_id="${PI_SESSION_ID:-manual}" # 会话 ID
-session_id="${session_id:0:8}" # 只取前 8 位
-session="pi-${project}-${session_id}-python" # 最终会话名
-
-### 基本使用
+# 项目 ID
+project_id="${PWD##*/}"
+# 会话 ID
+pi_session_id="${PI_SESSION_ID:-manual}"
+# 最终会话名
+tmux_session_id="pi-${project_id}-${pi_session_id: -8}-task_name"
 
 # 查看会话列表
 tmux list-sessions
 # 启动会话
-tmux new-session -d -s "$session" 'python -i'
+tmux new-session -d -s "$tmux_session_id" 'python -i'
 # 发送命令(C-m 模拟回车)
-tmux send-keys -t "$session" 'print(2 + 2)' C-m
+tmux send-keys -t "$tmux_session_id" 'print(2 + 2)' C-m
 # 查看输出
-tmux capture-pane -p -t "$session"
+tmux capture-pane -p -t "$tmux_session_id"
 # 结束会话
-tmux kill-session -t "$session"
+tmux kill-session -t "$tmux_session_id"
+# ...
 ```
