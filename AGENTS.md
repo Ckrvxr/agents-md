@@ -56,37 +56,38 @@ tmux capture-pane -p -t "$tmux_session_id"
 tmux kill-session -t "$tmux_session_id"
 # ...
 ```
+
 ### 3. fd（文件搜索增强）
 
-- `fd` 用于快速查找文件和目录；复杂属性筛选使用 `find`
-- 默认跳过隐藏路径和 `.gitignore` 忽略的路径
+- 优先使用 `fd` 快速查找文件和目录。
+- 部分环境可能使用 `fdfind`，而非 `fd`
+- `fd` 默认递归搜索，`pattern` 默认使用正则匹配文件名
+- 默认跳过隐藏路径和被忽略路径；两者是独立的过滤条件
 
 ```bash
-# 按名称查找（默认递归、正则匹配）
-fd pattern
-# 指定目录
-fd pattern /path/to/search
+# 基于当前目录查找
+fd 'pattern'
+# 指定目录查找
+fd 'pattern' '/path/to/search'
 # 只查找文件或目录
-fd -t f pattern
-fd -t d pattern
+fd -t f 'pattern'
+fd -t d 'pattern'
 # 按扩展名查找
-fd -e rs
+fd -e 'rs'
 # 使用 glob 匹配文件名
 fd -g '*.test.ts'
 # 匹配完整路径
-fd -p 'src/.*/test_.*\\.py'
-# 包含隐藏文件；包含 .gitignore 忽略的文件
-fd -H pattern
-fd -I pattern
-# 包含隐藏和所有被忽略的文件
-fd -u pattern
+fd -p 'src/.*/test_.*\.py'
+# 包含隐藏路径
+fd -H 'pattern'
+# 包含被忽略路径
+fd -I 'pattern'
 # 与 rg 组合搜索文件内容
-fd -e rs -X rg -n 'TODO|FIXME'
-# 每个结果执行一次命令；所有结果一次性传入命令
-fd -e json -x jq empty
-fd -g 'test_*.py' -X printf '%s\\n'
-# 查看帮助
+fd -e 'rs' -X rg -n 'TODO|FIXME'
+# 每个结果执行一次命令
+fd -e 'json' -x jq empty
+# 将所有结果一次性传给命令
+fd -g 'test_*.py' -X printf '%s\n'
+# 查看更多帮助
 fd --help
-# 部分环境可能使用 fdfind
-command -v fd fdfind
 ```
