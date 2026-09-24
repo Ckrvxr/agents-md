@@ -4,29 +4,28 @@
 
 ## 二、数据安全
 
-- 删除文件或卸载程序时，将目标移到回收站，不要使用 `rm`。
-- 未经用户明确同意，不要执行 `commit` 或 `push`。
+- 删除文件或卸载程序时，将目标移到回收站，不要使用 rm
+- 未经用户明确同意，不要执行 commit 或 push
 
 ## 三、资源管理
 
-- 将 skills 统一存放在 `~/.agents`。
+- 将 skills 统一存放在 `~/.agents`
 
 ## 四、工具使用
 
 ### 1. 工具路由
 
-- Windows 环境中，请优先使用 `wsl`，而不是 `powershell`。
-- 包管理器 apt > pnpm > npm > uv > scoop 。
-- GitHub 交互优先使用 `gh`。
-- 查询库和框架文档优先使用 `context7`。
+- Windows 环境中，请优先使用 wsl，而不是 powershell
+- 包管理器 apt > pnpm > npm > uv > scoop
+- GitHub 交互优先使用 gh
 - 环境中已经有以下常见 Unix 工具，请优先使用他们：
-  - **文件**：`rg`、`fd`、`fzf`、`file`、`7zip`、`rsync`
-    - `fd` 指 sharkdp/fd，是 `find` 的性能更好的现代替代品；查找文件时优先直接使用 `fd`（如 `fd -e rs`、`fd -t f`）。
-  - **数据处理**：`jq`、`yq`、`dasel`、`sqlite3`
-  - **多媒体**：`ffmpeg`、`imagemagick`、`yt-dlp`、`mediainfo`
-  - **网络**：`curl`、`aria2c`、`mtr`、`doggo`、`iperf3`、`tshark`
-  - **开发**：`go-task`、`clang`、`lldb`、`cmake`、`tmux`、`timeout`、`hyperfine`
-- 其他工具优先使用 `npx` 或 `uvx`。
+  - **文件**：rg、fd、fzf、file、7zip、rsync
+    - fd 指 sharkdp/fd，是 find 的性能更好的现代替代品；查找文件时优先直接使用它
+  - **数据处理**：jq、yq、dasel、sqlite3
+  - **多媒体**：ffmpeg、imagemagick、yt-dlp、mediainfo
+  - **网络**：curl、aria2c、mtr、doggo、iperf3、tshark
+  - **开发**：go-task、clang、lldb、cmake、tmux、timeout、hyperfine
+- 其他工具优先使用 npx 或 uvx
 
 ### 2. tmux（会话、交互、调试增强）
 
@@ -59,7 +58,7 @@ tmux kill-session -t "$tmux_session_id"
 
 ### 3. fd（文件搜索增强）
 
-- 优先使用 `fd` 快速查找文件和目录
+- 优先使用 fd 快速查找文件和目录
 - 基本语法：`fd [OPTIONS] [pattern] [path]...`；
 - 默认从当前目录递归搜索，pattern 默认按正则(Rust regex syntax)匹配文件名
 - 默认跳过隐藏路径和被忽略路径
