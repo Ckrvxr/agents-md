@@ -61,7 +61,7 @@ tmux kill-session -t "$tmux_session_id"
 
 - 优先使用 `fd` 快速查找文件和目录
 - 基本语法：`fd [OPTIONS] [pattern] [path]...`；
-- 默认从当前目录递归搜索，pattern 默认按正则匹配文件名
+- 默认从当前目录递归搜索，pattern 默认按正则(Rust regex syntax)匹配文件名
 - 默认跳过隐藏路径和被忽略路径
 
 ```bash
