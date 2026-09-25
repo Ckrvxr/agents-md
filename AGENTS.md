@@ -15,8 +15,8 @@
 
 ### 1. 工具路由
 
-- Windows 环境中，请优先使用 wsl，而不是 powershell
-- 包管理器 apt > pnpm > npm > uv > scoop
+- 包管理器 apt ≈ brew > pnpm > npm > uv > scoop
+- 学术搜索优先使用 paper-search; 代码、库搜索优先使用 context7
 - GitHub 交互优先使用 gh
 - 环境中已经有以下常见 Unix 工具，请优先使用他们：
   - **文件**：rg、fd、fzf、file、7zip、rsync
