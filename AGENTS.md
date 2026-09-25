@@ -20,11 +20,11 @@
 - GitHub 交互优先使用 gh
 - 环境中已经有以下常见 Unix 工具，请优先使用他们：
   - **文件**：rg、fd、fzf、file、7zip、rsync
-    - fd 指 sharkdp/fd，是 find 的性能更好的现代替代品；查找文件时优先直接使用它
+    - fd 指 sharkdp/fd，是 find 的性能更好的现代替代品；查找文件时优先使用它
   - **数据处理**：jq、yq、dasel、sqlite3
   - **多媒体**：ffmpeg、imagemagick、yt-dlp、mediainfo
   - **网络**：curl、aria2c、mtr、doggo、iperf3、tshark
-  - **开发**：go-task、clang、lldb、cmake、tmux、timeout、hyperfine
+  - **开发**：go-task、clang、lldb、cmake、tmux、hyperfine
 - 其他工具优先使用 npx 或 uvx
 
 ### 2. tmux（会话、交互、调试增强）
